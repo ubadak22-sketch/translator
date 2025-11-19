@@ -1,5 +1,5 @@
 // ---------------- CONFIG --------------------
-const BASE_URL = "https://adolfo-blondish-sublaryneally.ngrok-free.dev";
+const BASE_URL = "https://adolfo-blondish-sublaryngeally.ngrok-free.dev";
 
 // ---------------- LANG LIST -----------------
 const languages = {

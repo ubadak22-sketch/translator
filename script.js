@@ -143,6 +143,19 @@ function autoResizeTextarea(el) {
     }
 });
 
+// --------- Auto-resize Canvas ----------
+function resizeCanvasToParent() {
+    const canvas = document.getElementById('mainCanvas');
+    if (!canvas) return;
+    const parent = canvas.parentElement;
+    // Set canvas width/height attributes to match CSS pixel size
+    canvas.width = parent.offsetWidth;
+    canvas.height = parent.offsetHeight;
+    // Optionally, you could set up initial drawing here if needed
+}
+window.addEventListener('resize', resizeCanvasToParent);
+window.addEventListener('DOMContentLoaded', resizeCanvasToParent);
+
 // ----------------- SWAP LANGS ----------------
 document.getElementById("swapBtn").onclick = () => {
     let temp = src.value;

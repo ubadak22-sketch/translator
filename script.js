@@ -128,6 +128,21 @@ for (let name in languages) {
 src.value = "auto";
 tgt.value = "hi";
 
+// ------------ AUTO-RESIZE FOR TEXTAREAS ----------
+function autoResizeTextarea(el) {
+    el.style.height = "auto";
+    el.style.height = (el.scrollHeight) + "px";
+}
+
+["inputText", "outputText"].forEach(id => {
+    const textarea = document.getElementById(id);
+    if (textarea) {
+        textarea.addEventListener('input', () => autoResizeTextarea(textarea));
+        // Run initially
+        autoResizeTextarea(textarea);
+    }
+});
+
 // ----------------- SWAP LANGS ----------------
 document.getElementById("swapBtn").onclick = () => {
     let temp = src.value;
@@ -153,8 +168,10 @@ document.getElementById("translateBtn").onclick = async () => {
         const data = await res.json();
         document.getElementById("outputText").value =
             data.translated_text || data.error || "Translation failed.";
+        autoResizeTextarea(document.getElementById("outputText")); // Update sizing after translating
     } catch (e) {
         document.getElementById("outputText").value = "Error contacting server.";
+        autoResizeTextarea(document.getElementById("outputText"));
     }
 };
 
@@ -174,6 +191,7 @@ document.getElementById("ocrBtn").onclick = async () => {
     const data = await res.json();
     document.getElementById("inputText").value =
         data.extracted_text || data.error || "OCR failed.";
+    autoResizeTextarea(document.getElementById("inputText"));
 };
 
 // ----------------- DETECT LANGUAGE -------------
